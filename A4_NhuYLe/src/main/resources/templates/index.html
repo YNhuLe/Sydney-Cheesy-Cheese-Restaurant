@@ -1,0 +1,75 @@
+<!-- 
+Assignment 4: Sydney's Cheesey Cheese 2.2
+Date: Decemer 15, 2022
+
+Description: This application allow clients visit the Sydney's Cheesey Cheese 
+website,view cheese and information about us.But only authenticated users with 
+ correct name and password can log in and see the adding cheese to the inventory
+calculate the value, and display cheese's information to the table.  
+
+Description: A home page for Sydney's Cheesey Cheese application, 
+lead to Add cheese to inventory only for the authenticated users.
+This page also contain View our Cheeses, About us pages are visible to all users.
+ -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="ISO-8859-1">
+<title>Sydney's Cheesey Cheese</title>
+<!--Link tag that link the external style sheet to the file  -->
+<link rel="stylesheet" href="../static/css/main.css"
+	th:href="@{/css/main.css}">
+</head>
+<body>
+<!--header for the Home page  -->
+    <header th:replace="fragments/main.html :: mainHdr('Welcome')"> 
+	
+	</header>
+
+	<main>
+		<!--navigation shows in the Home page  -->
+		<nav th:replace="fragments/main.html :: mainNav('/')"></nav>
+
+		<section>
+			<img src="../static/images/cheese.jpg" th:src="@{/images/cheese.jpg}"
+				alt="wheels of cheese">
+
+			<p>We love cheese! Hard cheese, creamy cheese, semi-firm cheese,
+				spreadable cheese, cream cheese, yellow cheese, orange cheese, white
+				cheese, green cheese, blue cheese, stinky cheese, pretty cheese,
+				goat cheese, cow cheese, sheep cheese, but definitely not tofu
+				cheese; funky cheese, sweet cheese, sharp cheese, mild cheese,
+				medium cheese, cheese with chunks, cheese with holes, cheese with
+				toast, cheese with fruit, cheese with wine, curds, wheels, shreds,
+				tubs, and so much more!</p>
+
+
+			<p>Bocconcini mozzarella st. agur blue cheese. Rubber cheese
+				cheese triangles smelly cheese red leicester pepper jack bavarian
+				bergkase chalk and cheese mascarpone. Everyone loves airedale
+				roquefort gouda rubber cheese cheese and biscuits mozzarella
+				camembert de normandie. Danish fontina stilton cream cheese squirty
+				cheese goat bavarian bergkase fondue cheesy feet. Parmesan taleggio
+				port-salut boursin queso pepper jack taleggio hard cheese. Smelly
+				cheese manchego paneer hard cheese gouda blue castello fromage.</p>
+
+			<p>Mozzarella brie macaroni cheese. Smelly cheese caerphilly
+				stinking bishop taleggio cheese slices chalk and cheese cheese
+				strings cream cheese. Emmental red leicester swiss paneer taleggio
+				cheese slices monterey jack who moved my cheese. Danish fontina st.
+				agur blue cheese swiss cheese on toast stinking bishop cream cheese
+				danish fontina ricotta. Edam melted cheese airedale fromage frais
+				cheesy grin swiss chalk and cheese fromage frais. Croque monsieur
+				boursin cheese and biscuits brie who moved my cheese fondue
+				mascarpone airedale. Cut the cheese st. agur blue cheese pecorino
+				cheese strings pepper jack swiss st. agur blue cheese feta. Who
+				moved my cheese croque monsieur cut the cheese mascarpone.</p>
+		</section>
+	</main>
+	<!--footer shows the year and name of logged in user  -->
+	<footer th:replace="fragments/main.html :: mainFtr(${userName})"></footer> 
+
+</body>
+</html>

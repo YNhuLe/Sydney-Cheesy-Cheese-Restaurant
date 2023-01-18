@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<title>Register Form</title>
+<link rel="stylesheet" href="../static/css/forms.css"
+	th:href="@{/css/forms.css}">
+<link rel="stylesheet" href="../static/css/main.css"
+	th:href="@{/css/main.css}">
+	
+<script src="../static/scripts/validation.js"
+ th:src="@{/scripts/validation.js}"></script>
+
+</head>
+<body>
+<!-- Header shows the Register-->
+	<header th:replace="fragments/main.html :: mainHdr('Register')"></header>
+
+	<main>
+	<!--Navigation for the Register page  -->
+	<nav th:replace="fragments/main.html :: mainNav('/register')"></nav>
+
+		<section>
+			<form name="form" action="#" th:action="@{/register}" method="post">
+				<h3>Create an Account</h3>
+				<p>
+				<!--input name of the user  -->
+					<label for="userName">User Name: <input type="text"
+						name="userName" id="userName" required min="6"></label>
+				</p>
+				<p>
+				<!--input email of the user  -->
+					<label for="email">Email: <input type="email" name="email"
+						title="Enter an valid email address" required>
+					</label>
+				</p>
+
+				<p>
+				<!--input password of the user  -->
+					<label for="password">Password: <input type="password"
+						name="pass" id="pass" title="Choose a passwod" required>
+					</label>
+				</p>
+
+				<p>
+				<!--re-enter to confirm the password  -->
+					<label for="verify">Confirm Password: <input
+						type="password" name="verify" id="verify"
+						title="Re-enter the same password." required>
+					</label>
+				</p>
+
+				<p>
+					<input type="submit" value="Register">
+				</p>
+
+			</form>
+		</section>
+
+	</main>
+	<!--footer shows the year  -->
+	<footer th:replace="fragments/main.html :: mainFtr(${userName})"></footer> 
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!-- Assignment 3: Sydney's Cheesey Cheese 2.2
+Date:November 25, 2022
+
+Description: This application allow clients visit the Sydney's Cheesey Cheese 
+website,view cheese and information about us.But only authenticated users with 
+ correct name and password can log in and see the adding cheese to the inventory
+calculate the value, and display cheese's information to the table
+Description: View Our Cheese page shows the list of cheeses and 
+details about cheeses -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:sec="http://thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<title>Add Cheese Inventory</title>
+<!-- link tag that links to the main.css file in the directories -->
+<link rel="stylesheet" href="../static/css/main.css"
+	th:href="@{/css/main.css}">
+</head>
+<body>
+<!--Header for View Our Cheese page  -->
+ <header  th:replace="fragments/main.html :: mainHdr('View Our Cheese')"> 
+	</header>
+
+	<main>
+	<!-- Navigation for View Our Cheese page -->
+	<nav th:replace="fragments/main.html :: mainNav('/view')">View Our Cheese</nav>
+
+		<!-- display the list of cheese -->
+		<section>
+			<!-- image -->
+			<img src="../static/images/cheese.jpg" th:src="@{/images/cheese.jpg}"
+				alt="wheels of cheese">
+			<!--  unordered list to display the list of cheese in the inventory -->
+			<ul>
+				<!-- for each of cheeses in the list, display the name, weight and its unitsId -->
+				<li th:each=" c : ${cheeseInv}"
+					th:text="|${c.name} : ${c.weight} ${session.unitsList.get(c.unitsId)}|"></li>
+
+			</ul>
+		</section>
+	</main>
+	<!--footer shows year and name of logged in user  -->
+	<footer th:replace="fragments/main.html :: mainFtr(${name})"></footer> 
+</body>
+</html>

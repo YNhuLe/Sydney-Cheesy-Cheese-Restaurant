@@ -1,0 +1,120 @@
+<!-- 
+Programmer: NhuY Le
+Assignment: Sydney's Cheesey Cheese 2.2
+Date: December 15, 2022
+
+Description: A page that show the form to server site, get the data inputs
+calculate the total value from adding cheeses to inventory and show all the data
+to the table.
+And only the authenticated users can access to the Add Cheese Inventory
+View Cheese Inventory
+ -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="ISO-8859-1">
+
+<title>Sydney's Cheesey Cheese</title>
+
+<!-- link tag that link to the forms.css file in the directories-->
+<link rel="stylesheet" href="../static/css/forms.css"
+	th:href="@{/css/forms.css}">
+<!--link that links to the main.css file in the directories  -->
+<link rel="stylesheet" href="../static/css/main.css"
+	th:href="@{/css/main.css}">
+</head>
+
+<body>
+
+	<header th:replace="fragments/main.html :: mainHdr('Add Cheese Inventory')">
+	</header>
+
+	<main>
+<!--Navigation for Add Cheese Inventory page  -->
+<nav th:replace="fragments/main.html :: mainNav('/inventory/index')"></nav>
+
+		<section>
+		<!-- users can input to the form to add the new cheese -->
+		<!-- Method Post and action attribute in the form are used for 
+			mapping in the controller -->
+			
+			<form method="post" th:action="@{/inventory/index}" action="/inventory/index"
+				th:object="${newCheese}"> <!-- bind to the cheese object -->
+				
+				<h3>Add Cheese To Inventory</h3>
+				<p>
+				<!--Required input field for name with type text and maximum 255
+				character and bind it with the thymeleaf -->
+					<label for="name">Name:
+					 <input type="text" id="name"
+					name="name" required maxlength="255" th:field="*{name}">
+					</label></p>
+
+				<fieldset>
+					<legend>Amount Received</legend>
+					<div>
+						<label for="quantity">Quantity:
+						<!--Required input text field for the quantity with the 
+						default value is 0 and minimum is 1  -->
+							<input type="text"
+							name="quantity" id="quantity" th:field="*{quantity}" 
+							min="1"	required value="0">
+						</label>
+					</div>
+
+					<div>
+						<label for="weight">Weight:
+						<!--Required input text field for the weight and 
+						formatted   --> 
+							<input type="text"
+							name="weight" id="weight" th:field="*{weight}" 
+							required pattern="(\d*\.)?\d+"></label>
+							
+						 <label for="units">Units:
+						<!-- Selection units of cheese --> 
+						<select name="unitsId" id="unitsId" th:field="*{unitsId}">
+							<option th:each="u : ${session.unitsList}" th:value="${u.id}"
+							th:text="${u}"
+						>Units</option>
+						</select>
+						</label>
+					</div>
+				</fieldset>
+
+				<p>
+				<!--The price field is required text field and formatted  -->
+					<label for="price">Price: <input type="text" id="price"
+						name="price" required pattern="(\d*\.)?\d+"
+						 th:field="*{price}">
+					</label>
+				</p>
+
+				<p>
+				<!--A text field for specSheet field   -->
+					<label for="url">Spec Sheet URL: <input type="text"
+						name="specSheet" id="url" th:field="*{specSheet}">
+					</label>
+				</p>
+				
+				<p>
+				<!--input tag with type submit, submit button for the form
+				submit data to the table  -->
+					<input type="submit">
+				<!--input tag with type rest, reset button for the form,
+				reset data in the form back to the default value -->
+					 <input type="reset">
+
+				</p>
+			</form>
+		</section>
+	</main>
+
+<!-- footer shows year and name of logged in user -->
+		<footer th:replace="fragments/main.html :: mainFtr(${userName})"></footer> 
+
+
+</body>
+
+</html>

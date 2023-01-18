@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<!--fragment to show the header for each page  -->
+	<header th:fragment="mainHdr(name)">
+		<h1>Sydney's Cheesey Cheese</h1>
+		<h2 th:text="${name}">Level 2 heading</h2>
+		<div th:if="${ name != 'Log In'}">
+			<h3 sec:authorize="isAuthenticated()">
+				<a th:href="@{/logout}" href="/logout">Sign out</a>
+			</h3>
+			<h3 sec:authorize="!isAuthenticated()">
+				<a th:href="@{/login}" href="/login">Sign in</a>
+			</h3>
+
+		</div>
+	</header>
+
+<!-- fragment to show the navigation page foe each page -->
+	<nav th:fragment="mainNav(nav)">
+
+		<a th:href="@{/}" th:if="${ nav != '/'}">Home</a>
+		<div sec:authorize="!isAuthenticated()">
+			<a href="/register" th:href="@{/register}"
+				th:if="${nav != '/register'} ">Create Account</a>
+		</div>
+
+		<div sec:authorize="hasRole('MANAGER')">
+			<a th:href="@{/inventory/index}"
+				th:if="${nav != '/inventory/index' }">Add Cheese Inventory</a>	
+			<a th:href="@{/inventory/view}" th:if="${nav != '/inventory/view'}">
+				View Cheese Inventory</a>
+		</div>
+		
+		<a th:href="@{/view}" th:if="${nav != '/view'}">View Our Cheese</a> <a
+			href="#">About Us</a>
+	</nav>
+
+<!-- fragment for footer for each page -->
+	<footer th:fragment="mainFtr(name)">
+		<address>&copy; 2022</address>
+		<div sec:authorize="isAuthenticated()">
+			<span sec:authentication="name"></span>
+		</div>
+	</footer>
+</body>
+</html>

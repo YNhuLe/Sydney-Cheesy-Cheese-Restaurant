@@ -1,0 +1,192 @@
+@charset "UTF-8";
+/*
+ Wendi Jollymore, August 2022
+ PROG32758 Assignment Series: Sydney's Cheesey Cheese 2.3
+*/
+ 
+/* defaults */
+ :root {
+    --main-color: #116466;
+    --accent-color1: #d1e8e2;
+    --accent-color2: #fbe4aa;  
+    --accent-color3: #fde9Bc;
+    --highlight: #fdf8e7;
+ }
+ 
+body, html {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}
+ 
+body {
+    background-image: url("../images/cheeseTile_alpha.png");
+}
+ 
+/* grid, mobile first */    
+main {
+    display: flex;
+    flex-flow: column nowrap;
+    margin: 5px;
+    padding: 5px 0px;
+}
+ 
+ 
+/* page elements */
+ header, footer, form, table {
+    margin: 5px;
+    padding: 5px;
+ }
+ 
+header, footer, nav, table, img, nav > a {
+    border-radius: 5px;
+}
+ 
+header, footer, nav, table {
+    background-color: var(--accent-color2);
+    border: 1px solid var(--main-color);
+    color: var(--main-color);
+}
+ 
+header > div a {
+    background-color:var(--accent-color2);
+    color: var(--main-color);
+    font-weight: bold;
+    margin: 2px;
+    padding: 5px 10px;
+    text-decoration: none;
+}
+header > div {
+    text-align: right;
+}
+ 
+footer > address, footer > div {
+    margin: 3px;
+}
+ 
+footer > div {
+    padding: 3px;
+}
+ 
+h1 {
+    color: var(--main-color);
+    font-size: 1.5em;
+}
+h2 {
+    color: var(--main-color);
+    font-size: 1.2em;   
+}
+ 
+/* navigation and links */
+ 
+main > nav {
+    margin: 5px 5px 5px 0px;
+    padding: 10px 5px;
+    text-align: center;
+}
+ 
+main > nav  a {
+    background-color:var(--accent-color2);
+    color: var(--main-color);
+    display: inline-block;
+    margin: 2px;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+}
+ 
+main > nav a:visited, header > div a:visited {
+    color: var(--main-color);
+}
+ 
+main > nav a:hover {
+    background-color: var(--main-color);
+    color: var(--accent-color1);
+}
+ 
+/* content */
+ 
+section {
+    margin: 5px 0px 5px 5px;
+}
+ 
+section p {
+    background-color: var(--accent-color3);
+    margin: 5px 7px;
+}
+ 
+section img {
+    float: right;
+    margin: 7px;
+    display: none;
+}
+ 
+/* tables */
+table {
+    border-collapse: collapse;
+    border-width: 3px;
+}
+ 
+caption, td, th {
+    padding: 4px;
+}
+ 
+caption {
+    background-color: var(--accent-color1);
+    border: 3px solid var(--main-color);
+    border-bottom: 0px;
+    font-weight: bold;
+}
+ 
+td, th {
+    border: 1px solid var(--main-color);
+}
+ 
+th {
+    background-color: var(--accent-color1);
+}
+ 
+td {
+    background-color: var(--accent-color3);
+}
+ 
+/* media queries */
+ 
+@media screen and (min-width: 398px) {
+    section img {
+        display: inline;
+        width: 200px;
+    }
+}
+ 
+@media screen and (min-width: 768px) {
+    section img {
+        display: inline;
+        width: 259px;
+    }
+    main > nav a {
+        display: block;
+        text-align: left;
+    }
+    main > nav {
+        align-self: stretch;
+        flex: 1 0 25%;
+        padding: 5px;
+        text-align: left;
+    }
+    main > section {
+        flex: 3 1 75%;;
+    }
+    main {
+        align-items: flex-start;
+        flex-flow: row nowrap;
+        justify-content: flex-start;
+    }
+    
+}
+ 
+@media screen and (min-width: 1200px) {
+    section img {
+        display: inline;
+        width: 400px;
+    }
+}

@@ -1,0 +1,65 @@
+<!--Assignment: Sydney's Cheesey Cheese 2.2
+Date:December 15, 2022 
+
+Description: View Cheese Inventory shows the list of cheeses in the inventory
+and the details of each cheese -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:sec="http://thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<title>View Our Cheese</title>
+<link rel="stylesheet" href="../static/css/main.css"
+	th:href="@{/css/main.css}">
+</head>
+<body>
+<!--header for the View Cheese Inventory page  --><header  th:replace="fragments/main.html :: mainHdr('View Cheese Inventory')"> 
+	</header>
+
+
+	<main>
+
+		<nav th:replace="fragments/main.html :: mainNav('/inventory/view')">
+		View Cheese Inventory</nav>
+		
+
+		<section>
+			<!--Table that shows the cheese in the inventory  -->
+			<!-- Only show the table unless there is cheese in the inventory -->
+			<p th:if="${cheeseInv.isEmpty()}">No cheese inventory</p>
+			<table th:unless="${cheeseInv.isEmpty()}">
+				<!--table header  -->
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Amount</th>
+					<th>Price</th>
+					<!-- table row for each cheese -->
+				<tr th:each="t : ${cheeseInv}">
+					<!--table data for the ID  -->
+					<td th:text="${t.id}"></td>
+					<td>
+						<!--if the specSheet is not null and not empty
+	            	table will show the name of cheese with the link  -->
+		            <a th:if="${t.specSheet != null} and ${t.specSheet != ''}"
+						th:text="${t.name}" th:href="${t.specSheet}"></a> 
+						<!--only show the name of cheese when the specSheet null and empty -->
+						<span th:unless="${t.specSheet !=''} and  
+						${t.specSheet != null}"	th:text="${t.name}"></span>
+					</td>
+					<!--show the quantity, weight, units ID for each cheese  -->
+					<td
+						th:text="|${t.quantity} x ${t.weight} 
+						${session.unitsList.get(t.unitsId)}|">
+					</td>
+					<!-- formatted price of the cheese -->
+					<td th:text="${#numbers.formatCurrency(t.price)}"></td>
+			</table>
+		</section>
+	</main>
+	<!--footer shows the year and name of logged in user  -->
+		<footer th:replace="fragments/main.html :: mainFtr(${userName})"></footer> 
+
+</body>
+</html>
